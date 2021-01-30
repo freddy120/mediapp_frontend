@@ -1,0 +1,51 @@
+<!-- No olvidar agregar ReactiveFormsModule en App.module.ts, util para trabajar con formularios-->
+<form class="example-container" [formGroup]="form" #frmSignos="ngForm" (ngSubmit)="operar()">
+
+    <div [hidden]="true">
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="ID" required formControlName="id">
+        </mat-form-field>
+    </div>
+
+    <mat-form-field>
+        <input type="text" placeholder="Paciente" matInput 
+            [matAutocomplete]="autoPaciente"
+            [formControl]="myControlPaciente" formControlName="paciente">            
+    </mat-form-field>
+
+    <mat-autocomplete #autoPaciente="matAutocomplete" [displayWith]="mostrarPaciente">
+        <mat-option *ngFor="let p of pacientesFiltrados$ | async" [value]="p">
+            {{ p.nombres }} {{p.apellidos}}
+        </mat-option>
+    </mat-autocomplete>
+
+    <mat-form-field>
+        <input matInput [matDatepicker]="picker" placeholder="Escoge una fecha" [max]="maxFecha" required formControlName="fecha">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">        
+        <input matInput placeholder="Temperatura" required formControlName="temperatura" type="number">   
+        <small *ngIf="f.temperatura.errors?.required && f.temperatura.touched" class="invalido">temperatura es requerido</small>                 
+    </mat-form-field>
+
+
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="Pulso" formControlName="pulso" type="number">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="Ritmo respiratorio" formControlName="ritmo" type="number">
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="frmSignos.invalid">
+        <mat-icon>done</mat-icon>
+        <span>Aceptar</span>
+    </button>
+    <button mat-raised-button color="accent" routerLink='/signos' type="button">
+        <mat-icon>close</mat-icon>
+        <span>Cancelar</span>
+    </button>
+
+</form>

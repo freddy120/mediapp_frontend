@@ -1,0 +1,8 @@
+.example-card {
+    max-width: 400px;
+  }
+  
+  .example-header-image {
+    background-image: url('https://avatars.githubusercontent.com/u/6124331?s=460&u=8801be8d2978cb04549ec6a4b1e0903b496a9ccc&v=4');
+    background-size: cover;
+  }
