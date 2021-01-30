@@ -29,7 +29,8 @@ export class EspecialidadEdicionComponent implements OnInit {
 
     this.form = new FormGroup({
       'id': new FormControl(0),
-      'nombre': new FormControl('')
+      'nombre': new FormControl(''),
+      'descripcion': new FormControl(''),
     });
 
     this.route.params.subscribe((params: Params) => {
@@ -44,9 +45,12 @@ export class EspecialidadEdicionComponent implements OnInit {
       this.especialidadService.listarPorId(this.id).subscribe(data => {
         let id = data.idEspecialidad;
         let nombre = data.nombre;
+        let descripcion = data.descripcion;
+
         this.form = new FormGroup({
           'id': new FormControl(id),
-          'nombre': new FormControl(nombre)
+          'nombre': new FormControl(nombre),
+          'descripcion': new FormControl(descripcion)
         });
       });
     }
@@ -55,6 +59,7 @@ export class EspecialidadEdicionComponent implements OnInit {
   operar() {
     this.especialidad.idEspecialidad = this.form.value['id'];
     this.especialidad.nombre = this.form.value['nombre'];
+    this.especialidad.descripcion = this.form.value['descripcion'];
 
     if (this.especialidad != null && this.especialidad.idEspecialidad > 0) {
       //BUENA PRACTICA

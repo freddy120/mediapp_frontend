@@ -10,6 +10,10 @@
         <input matInput placeholder="Nombre Especialidad" required formControlName="nombre">
     </mat-form-field>
 
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="Descripción" required formControlName="descripcion">
+    </mat-form-field>
+
     <button mat-raised-button color="primary" type="submit" [disabled]="espForm.invalid">
         <mat-icon>done</mat-icon>
         <span>Aceptar</span>

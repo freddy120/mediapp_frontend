@@ -23,6 +23,11 @@
                 <mat-cell *matCellDef="let row"> {{row.nombre}} </mat-cell>
             </ng-container>
 
+            <ng-container matColumnDef="descripcion">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Descripcion </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.descripcion}} </mat-cell>
+            </ng-container>
+
             <ng-container matColumnDef="acciones">
                 <mat-header-cell *matHeaderCellDef>Acciones</mat-header-cell>
                 <mat-cell *matCellDef="let row">

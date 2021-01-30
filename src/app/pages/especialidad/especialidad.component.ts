@@ -15,7 +15,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 })
 export class EspecialidadComponent implements OnInit {
 
-  displayedColumns = ['id', 'nombre', 'acciones'];
+  //displayedColumns = ['id', 'nombre', 'acciones'];
+  displayedColumns = ['id', 'nombre', 'descripcion', 'acciones'];
   dataSource: MatTableDataSource<Especialidad>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
