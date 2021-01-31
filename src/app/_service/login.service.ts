@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Menu } from '../_model/menu';
+import { JwtHelperService } from '@auth0/angular-jwt';
+
 
 @Injectable({
   providedIn: 'root'
@@ -36,15 +38,26 @@ export class LoginService {
   cerrarSesion(){
     let token = sessionStorage.getItem(environment.TOKEN_NAME);
 
-    if(token){
-      this.http.get(`${environment.HOST}/tokens/anular/${token}`).subscribe(() => {
+    const helper = new JwtHelperService();
+
+    if (helper.isTokenExpired(token)) {
+      sessionStorage.clear();
+      this.router.navigate(['login']);  
+    }else{
+
+      if(token){
+        this.http.get(`${environment.HOST}/tokens/anular/${token}`).subscribe(() => {
+          sessionStorage.clear();
+          this.router.navigate(['login']);
+        });
+      }else{
         sessionStorage.clear();
         this.router.navigate(['login']);
-      });
-    }else{
-      sessionStorage.clear();
-      this.router.navigate(['login']);
-    }    
+      }  
+
+    }
+    
+     
   }
 
   enviarCorreo(correo: string){
